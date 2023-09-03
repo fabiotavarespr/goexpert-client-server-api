@@ -1,9 +1,5 @@
 PWD = $(shell pwd -L)
 GOCMD=go
-GOTEST=$(GOCMD) test
-DOCKER_CMD=docker
-DOCKER_COMPOSE_CMD=docker-compose
-PATH_DOCKER_COMPOSE_FILE=resources/docker-compose/docker-compose.yaml
 
 ifeq ($(OS), Windows_NT)
 	SHELL := powershell.exe
@@ -53,17 +49,3 @@ run-client: fmt ## Run client
 
 clean-project: ## Clean project
 	@rm quote.db cotacao.txt
-
-docker-compose-up: ## Run docker-compose services of project
-	$(DOCKER_COMPOSE_CMD) -f $(PATH_DOCKER_COMPOSE_FILE) up -d
-
-docker-compose-down: ## Stop docker-compose services of project
-	$(DOCKER_COMPOSE_CMD) -f $(PATH_DOCKER_COMPOSE_FILE) down --remove-orphans
-
-docker-compose-restart: docker-compose-down docker-compose-up ## Restart docker-compose services of project
-
-docker-compose-logs: ## Logs docker-compose containers of project
-	$(DOCKER_COMPOSE_CMD) -f $(PATH_DOCKER_COMPOSE_FILE) logs -f
-
-docker-compose-ps: ## List docker-compose containers of project
-	$(DOCKER_COMPOSE_CMD) -f $(PATH_DOCKER_COMPOSE_FILE) ps
