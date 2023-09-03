@@ -15,6 +15,7 @@
 # vendor/
 
 cotacao.txt
+quote.db
 Descricao.md
 
 .idea/
